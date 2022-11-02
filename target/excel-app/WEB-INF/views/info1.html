@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type'/>
+    <link rel="stylesheet" href=D:\прога\excel-app\src\main\webapp\resources\css\Style.css>
+    <title>Title</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Файл:</h1>
+        <table>
+            <tr>
+                <td rowspan="2">Счет</td>
+                <td colspan="2">ВХОДЯЩЕЕ САЛЬДО</td>
+                <td colspan="2">ОБОРОТЫ</td>
+                <td colspan="2">ИСХОДЯЩЕЕ САЛЬДО</td>
+            </tr>
+            <tr>
+                <td>Актив</td>
+                <td>Пассив</td>
+                <td>Дебет</td>
+                <td>Кредит</td>
+                <td>Актив</td>
+                <td>Пассив</td>
+            </tr>
+            <tr>
+                <td colspan="3">
+                    <table th:each="class : ${openingbalance}">
+                        <tr>
+                            <td th:text="${class.number}"/>
+                        <tr/>
+                        <tr>
+                            <table th:each="subClass : ${class.subClasses}">
+                                <tr th:each="item : ${subClass.balance}">
+                                    <td th:text="${item.getAccount()}"/>
+                                    <td th:text="${item.getAsset()}"/>
+                                    <td th:text="${item.getLiability()}"/>
+                                </tr>
+                                <tr>
+                                    <td th:text="${subClass.number}"/>
+                                    <td th:text="${subClass.assetsSum}"/>
+                                    <td th:text="${subClass.liabilitySum}"/>
+                                </tr>
+                            </table>
+                        </tr>
+                        <tr>
+                            <td th:text="${class.number}"/>
+                            <td th:text="${class.assetsSum}"/>
+                            <td th:text="${class.liabilitySum}"/>
+                        </tr>
+                    </table>
+                </td>
+                <td colspan="2">
+                    <table th:each="class : ${turnover}">
+                        <tr>
+                            <td th:text="${class.number}"/>
+                        <tr/>
+                        <tr>
+                            <table th:each="subClass : ${class.subClasses}">
+                                <tr th:each="item : ${subClass.balance}">
+                                    <td th:text="${item.getAsset()}"/>
+                                    <td th:text="${item.getLiability()}"/>
+                                </tr>
+                                <tr>
+                                    <td th:text="${subClass.assetsSum}"/>
+                                    <td th:text="${subClass.liabilitySum}"/>
+                                </tr>
+                            </table>
+                        </tr>
+                        <tr>
+                            <td th:text="${class.assetsSum}"/>
+                            <td th:text="${class.liabilitySum}"/>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>

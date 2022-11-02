@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type'/>
+    <link rel="stylesheet" type="text/css" href="../../resources/css/info.css">
+    <title>Info</title>
+</head>
+<body>
+<div class="container">
+    <h1 th:text="${file.getName()}"/>
+    <table>
+        <tr class="up">
+            <td rowspan="2" class="account head">Б/СЧ</td>
+            <td class="head" colspan="2">ВХОДЯЩЕЕ САЛЬДО</td>
+            <td class="head" colspan="2">ОБОРОТЫ</td>
+            <td class="head" colspan="2">ИСХОДЯЩЕЕ САЛЬДО</td>
+        </tr>
+        <tr class="up">
+            <td class="head">Актив</td>
+            <td class="head">Пассив</td>
+            <td class="head">Дебет</td>
+            <td class="head">Кредит</td>
+            <td class="head">Актив</td>
+            <td class="head">Пассив</td>
+        </tr>
+    </table>
+    <div class="tables">
+        <div class="table">
+            <div th:each="class : ${openingbalance}">
+                <table th:each="subClass : ${class.subClasses}">
+                            <tr th:each="item : ${subClass.balance}">
+                                <td class="account" th:text="${item.getAccount()}"/>
+                                <td th:text="${item.getAsset()}"/>
+                                <td th:text="${item.getLiability()}"/>
+                            </tr>
+                            <tr>
+                                <td class="account head" th:text="${subClass.number}"/>
+                                <td class="head" th:text="${subClass.assetsSum}"/>
+                                <td class="head" th:text="${subClass.liabilitySum}"/>
+                            </tr>
+                </table>
+                <table>
+                    <tr>
+                        <td class="account head" th:text="'КЛАСС '+${class.number}"/>
+                        <td class="head" th:text="${class.assetsSum}"/>
+                        <td class="head" th:text="${class.liabilitySum}"/>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="table">
+            <div th:each="class : ${turnover}">
+                <table th:each="subClass : ${class.subClasses}">
+                    <tr th:each="item : ${subClass.balance}">
+                        <td th:text="${item.getAsset()}"/>
+                        <td th:text="${item.getLiability()}"/>
+                    </tr>
+                    <tr>
+                        <td class="head" th:text="${subClass.assetsSum}"/>
+                        <td class="head" th:text="${subClass.liabilitySum}"/>
+                    </tr>
+                </table>
+                <table>
+                    <tr>
+                        <td class="head" th:text="${class.assetsSum}"/>
+                        <td class="head" th:text="${class.liabilitySum}"/>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="table">
+            <div th:each="class : ${closingbalance}">
+                <table th:each="subClass : ${class.subClasses}">
+                    <tr th:each="item : ${subClass.balance}">
+                        <td th:text="${item.getAsset()}"/>
+                        <td th:text="${item.getLiability()}"/>
+                    </tr>
+                    <tr>
+                        <td class="head" th:text="${subClass.assetsSum}"/>
+                        <td class="head" th:text="${subClass.liabilitySum}"/>
+                    </tr>
+                </table>
+                <table>
+                    <tr>
+                        <td class="head" th:text="${class.assetsSum}"/>
+                        <td class="head" th:text="${class.liabilitySum}"/>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    <table>
+        <tr>
+            <td class="account head">БАЛАНС</td>
+            <td class="head" th:text="${openingbalanceSum[0]}"/>
+            <td class="head" th:text="${openingbalanceSum[1]}"/>
+            <td class="head" th:text="${turnoverSum[0]}"/>
+            <td class="head" th:text="${turnoverSum[1]}"/>
+            <td class="head" th:text="${closingbalanceSum[0]}"/>
+            <td class="head" th:text="${closingbalanceSum[1]}"/>
+        </tr>
+    </table>
+
+</div>
+</body>
+<script src="../../resources/script/script.js"></script>
+</html>

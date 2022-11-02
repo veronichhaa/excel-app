@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type'/>
+    <link rel="stylesheet" href="../../resources/css/index.css">
+    <title>Index</title>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="inner">
+            <div class="form">
+                <h1>Загруженные файлы:</h1>
+                <p th:if="${files.isEmpty}">Нет файлов</p>
+                <table th:unless="${files.isEmpty}">
+                    <tr th:each="file, stat : ${files}">
+                        <td style="background-color: #a7aab5; border: 2px solid #b2b5bf" th:text="${stat.count}"/>
+                        <td style="background-color: #d1d4de; border: 2px solid #d5d8e3">
+                            <a th:text="${file.getName()}" th:href="@{'/' + ${file.getId()}}"/>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="form">
+                <h1>Добавить файл</h1>
+                <form accept-charset="UTF-8" method="post" action="/uploadFile" enctype="multipart/form-data">
+                    <input class="input" type="file" name="file">
+                    <button type="submit">Загрузить</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

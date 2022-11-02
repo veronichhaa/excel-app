@@ -1,0 +1,46 @@
+body{
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+}
+
+.container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.tables{
+    display: flex;
+}
+
+h1{
+    font-size: 28px;
+}
+
+.table-head{
+}
+
+table{
+    border-spacing: 3px;
+}
+td{
+    width: 170px;
+    padding: 5px 10px;
+    background-color: #b7d2ed;
+    text-align: right;
+    font-stretch: condensed;
+}
+
+.account{
+    width: 70px;
+}
+
+.head{
+    font-weight: bold;
+    background-color: #8eb6ed;
+    font-stretch: condensed;
+}
+
+.up{
+    font-size: 18px;
+}
